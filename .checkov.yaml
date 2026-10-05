@@ -1,0 +1,32 @@
+# Checkov configuration for expensr-infra
+#
+# Checkov is a static security/compliance scanner for IaC. Where TFLint checks
+# correctness and style, Checkov checks security posture: unencrypted storage,
+# security groups open to the world, public RDS, over-broad IAM, and so on.
+#
+# Run with: checkov --config-file .checkov.yaml
+# (the Makefile `security` target invokes it this way.)
+
+# Scan this repo. Terraform is the only IaC here.
+directory:
+  - .
+
+framework:
+  - terraform
+
+# Never descend into local Terraform working data or VCS internals.
+skip-path:
+  - .terraform
+  - .git
+
+# Readable locally, still parseable in CI.
+compact: true
+quiet: true
+
+# Phase 1 is tooling-only: the modules are empty stubs with no resources, so
+# Checkov has nothing to flag yet. As real resources arrive in Phase 3, tighten
+# this rather than loosen it. Record DELIBERATE, reviewed exceptions below with
+# a one-line justification each — never blanket-skip to make a run go green.
+#
+# skip-check:
+#   - CKV_AWS_123  # reason this control does not apply here

@@ -1,0 +1,34 @@
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files (state should live in the remote backend, never in git)
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+crash.*.log
+
+# Exclude all .tfvars files that may contain sensitive data. The committed
+# terraform.tfvars for this project holds only non-secret config, so it is
+# explicitly re-included below.
+*.tfvars
+*.tfvars.json
+!envs/staging/terraform.tfvars
+
+# Ignore override files, which are usually used for local overrides
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
+
+# Ignore the lock file's local provider mirror cache, but KEEP the lock file
+# itself (.terraform.lock.hcl) committed so provider versions are reproducible.
+
+# OS / editor noise
+.DS_Store
+*.swp
